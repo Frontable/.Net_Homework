@@ -4,26 +4,59 @@ class Program
 {
 	static void Main(string[] args)
 	{
-		Console.WriteLine("Enter the first 9 digits of the ISBN:");
-		string input = Console.ReadLine();
+		Console.WriteLine("Enter the number of elements in the array:");
+		int n = int.Parse(Console.ReadLine());
 
-		int checkDigit = CalculateCheckDigit(input);
+		int[] originalArray = new int[n];
+		Console.WriteLine("Enter the elements of the array:");
 
-		string isbn = input + (checkDigit == 10 ? "X" : checkDigit.ToString());
-		Console.WriteLine($"The complete ISBN is: {isbn}");
-	}
-
-	static int CalculateCheckDigit(string input)
-	{
-		int sum = 0;
-		for (int i = 0; i < input.Length; i++)
+		for (int i = 0; i < n; i++)
 		{
-			int digit = int.Parse(input[i].ToString());
-			sum += (10 - i) * digit;
+			originalArray[i] = int.Parse(Console.ReadLine());
 		}
 
-		int remainder = sum % 11;
-		int checkDigit = (remainder == 0) ? 0 : (11 - remainder);
-		return checkDigit;
+		Console.WriteLine("Original Array:");
+		PrintArray(originalArray);
+
+		int[] newArray = CreateNewArray(originalArray);
+		Console.WriteLine("New Array:");
+		PrintArray(newArray);
+	}
+
+	static int[] CreateNewArray(int[] array)
+	{
+		int[] newArray = new int[array.Length];
+		int index = 0;
+
+		for (int i = 0; i < array.Length; i++)
+		{
+			bool found = false;
+			for (int j = 0; j < index; j++)
+			{
+				if (array[i] == newArray[j])
+				{
+					found = true;
+					break;
+				}
+			}
+
+			if (!found)
+			{
+				newArray[index] = array[i];
+				index++;
+			}
+		}
+
+		Array.Resize(ref newArray, index);
+		return newArray;
+	}
+
+	static void PrintArray(int[] array)
+	{
+		foreach (var element in array)
+		{
+			Console.Write(element + " ");
+		}
+		Console.WriteLine();
 	}
 }
