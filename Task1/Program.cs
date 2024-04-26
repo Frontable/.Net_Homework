@@ -8,6 +8,14 @@ class Program
 		int a = int.Parse(Console.ReadLine());
 		int b = int.Parse(Console.ReadLine());
 
+		
+		if (a > b)
+		{
+			int temp = a;
+			a = b;
+			b = temp;
+		}
+
 		Console.WriteLine($"Numbers with exactly two 'A's in their duodecimal representation between {a} and {b} (inclusive):");
 		for (int i = a; i <= b; i++)
 		{
@@ -21,9 +29,10 @@ class Program
 	static int CountAInDuodecimal(int num)
 	{
 		int count = 0;
+		num = Math.Abs(num); 
 		while (num > 0)
 		{
-			if (num % 12 == 10) // 'A' in duodecimal representation
+			if (num % 12 == 10) 
 			{
 				count++;
 			}
