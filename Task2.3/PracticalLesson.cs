@@ -1,14 +1,12 @@
 ﻿using System;
 
-class PracticalLesson
+class PracticalLesson : Lesson
 {
-	public string Description { get; }
 	public string TaskLink { get; }
 	public string SolutionLink { get; }
 
-	public PracticalLesson(string description, string taskLink, string solutionLink)
+	public PracticalLesson(string description, string taskLink, string solutionLink) : base(description)
 	{
-		Description = description;
 		TaskLink = taskLink;
 		SolutionLink = solutionLink;
 	}

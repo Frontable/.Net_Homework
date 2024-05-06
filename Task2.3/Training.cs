@@ -1,37 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 class Training
 {
-	private List<object> contents = new List<object>();
+	private Lesson[] lessons = new Lesson[0];
 
-	public void Add(Lecture lecture)
+	public void Add(Lesson lesson)
 	{
-		contents.Add(lecture);
-	}
-
-	public void Add(PracticalLesson practicalLesson)
-	{
-		contents.Add(practicalLesson);
+		Array.Resize(ref lessons, lessons.Length + 1);
+		lessons[lessons.Length - 1] = lesson;
 	}
 
 	public bool IsPractical()
 	{
-		return contents.All(item => item is PracticalLesson);
+		return lessons.All(lesson => lesson is PracticalLesson);
 	}
 
 	public Training Clone()
 	{
 		Training clonedTraining = new Training();
 
-		foreach (var item in contents)
+		foreach (var lesson in lessons)
 		{
-			if (item is Lecture lecture)
+			if (lesson is Lecture lecture)
 			{
 				clonedTraining.Add(new Lecture(lecture.Description, lecture.Topic));
 			}
-			else if (item is PracticalLesson practicalLesson)
+			else if (lesson is PracticalLesson practicalLesson)
 			{
 				clonedTraining.Add(new PracticalLesson(practicalLesson.Description, practicalLesson.TaskLink, practicalLesson.SolutionLink));
 			}

@@ -1,13 +1,11 @@
 ﻿using System;
 
-class Lecture
+class Lecture : Lesson
 {
-	public string Description { get; }
 	public string Topic { get; }
 
-	public Lecture(string description, string topic)
+	public Lecture(string description, string topic) : base(description)
 	{
-		Description = description;
 		Topic = topic;
 	}
 }
