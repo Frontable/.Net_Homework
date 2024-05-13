@@ -1,37 +1,37 @@
-﻿using System;
-using System.Linq;
-
-class Training
+﻿class Training
 {
-	private Lesson[] lessons = new Lesson[0];
+	public string Description { get; }
+	private List<Session> sessions = new List<Session>();
 
-	public void Add(Lesson lesson)
+	public Training(string description)
 	{
-		Array.Resize(ref lessons, lessons.Length + 1);
-		lessons[lessons.Length - 1] = lesson;
+		Description = description;
+	}
+
+	public void Add(Session session)
+	{
+		sessions.Add(session);
 	}
 
 	public bool IsPractical()
 	{
-		return lessons.All(lesson => lesson is PracticalLesson);
+		return sessions.TrueForAll(session => session is PracticalLesson);
 	}
 
 	public Training Clone()
 	{
-		Training clonedTraining = new Training();
-
-		foreach (var lesson in lessons)
+		Training clonedTraining = new Training(Description);
+		foreach (Session session in sessions)
 		{
-			if (lesson is Lecture lecture)
+			if (session is Lecture lecture)
 			{
-				clonedTraining.Add(new Lecture(lecture.Description, lecture.Topic));
+				clonedTraining.Add(new Lecture(lecture.Topic));
 			}
-			else if (lesson is PracticalLesson practicalLesson)
+			else if (session is PracticalLesson practicalLesson)
 			{
-				clonedTraining.Add(new PracticalLesson(practicalLesson.Description, practicalLesson.TaskLink, practicalLesson.SolutionLink));
+				clonedTraining.Add(new PracticalLesson(practicalLesson.TaskCondition, practicalLesson.Solution));
 			}
 		}
-
 		return clonedTraining;
 	}
 }

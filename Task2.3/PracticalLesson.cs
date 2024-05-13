@@ -1,13 +1,11 @@
-﻿using System;
-
-class PracticalLesson : Lesson
+﻿class PracticalLesson : Session
 {
-	public string TaskLink { get; }
-	public string SolutionLink { get; }
+	public string TaskCondition { get; }
+	public string Solution { get; }
 
-	public PracticalLesson(string description, string taskLink, string solutionLink) : base(description)
+	public PracticalLesson(string taskCondition, string solution)
 	{
-		TaskLink = taskLink;
-		SolutionLink = solutionLink;
+		TaskCondition = taskCondition;
+		Solution = solution;
 	}
 }

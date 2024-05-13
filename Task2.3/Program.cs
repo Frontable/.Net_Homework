@@ -1,33 +1,44 @@
 ﻿using System;
+using System.Collections.Generic;
 
 class Program
 {
-	static void Main(string[] args)
+	static void Main()
 	{
-		Lecture lectureOne = new Lecture("Introduction", "Basic Concepts");
-		Lecture lectureTwo = new Lecture("Data Structures", "Arrays and Lists");
+		// Create a training session
+		Training training = new Training("Advanced C# Programming");
 
-		PracticalLesson firstPractical = new PracticalLesson("Task 1", "task1.com", "solution1.com");
-		PracticalLesson secondPractical = new PracticalLesson("Task 2", "task2.com", "solution2.com");
-
-		Training firstTraining = new Training();
-		firstTraining.Add(lectureOne);
-		firstTraining.Add(firstPractical);
-
-		Console.WriteLine("Is the first training practical? " + firstTraining.IsPractical());
-
-		Training firstClonedTraining = firstTraining.Clone();
-
+		// Add lectures and practical lessons
+		Lecture lecture1 = new Lecture("Introduction to OOP");
+		Lecture lecture2 = new Lecture("Data Structures");
+		PracticalLesson practical1 = new PracticalLesson("Implement a linked list", "C# code for linked list");
+		PracticalLesson practical2 = new PracticalLesson("Write unit tests", "Unit test cases");
 		
+		Training trainingTwo = new Training("Introduction to SDL");
 
-		Training secondTraining = new Training();
-		//secondTraining.Add(lectureTwo);
-		secondTraining.Add(secondPractical);
+		PracticalLesson practicalTwo_One = new PracticalLesson("Implement a linked list", "C# code for linked list");
+		PracticalLesson practicalTwo_Two = new PracticalLesson("Write unit tests", "Unit test cases");
 
-		Console.WriteLine("Is the second training practical? " + secondTraining.IsPractical());
-
-		Training secondClonedTraining = secondTraining.Clone();
-
+		training.Add(lecture1);
+		training.Add(lecture2);
+		training.Add(practical1);
+		training.Add(practical2);
 		
+		
+		trainingTwo.Add(practicalTwo_One);
+		trainingTwo.Add(practicalTwo_Two);
+
+		// Check if the training is practical-only
+		Console.WriteLine($"Is practical-only: {training.IsPractical()}");
+
+		// Clone the training
+		Training clonedTraining = training.Clone();
+		Console.WriteLine($"Cloned training description: {clonedTraining.Description}");
+		
+		Console.WriteLine($"Is practical-only: {trainingTwo.IsPractical()}");
+
+		// Clone the training
+		Training clonedTrainingTwo = trainingTwo.Clone();
+		Console.WriteLine($"Cloned training description: {clonedTrainingTwo.Description}");
 	}
 }
